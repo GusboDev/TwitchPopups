@@ -1,11 +1,5 @@
 // Change Limmy to your Twitch channel
-const twitchChannel = 'Limmy';
-
-// Your alert background. Default is a vibrant green
-const alertBg = '#00AA00';
-
-// Spotlight background colour. Default is a deep, rich "gold"
-const spotlightBg = '#a66600';
+const twitchChannel = 'kaedesmith';
 
 // The emoji that surrounds the spotlight messages.
 const spotlightEmoji = '⭐';

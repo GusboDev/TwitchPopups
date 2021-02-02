@@ -1,25 +1,30 @@
+
 const popup = {
     /**
      * Displays popup on screen with the given text and colour.
      */
-    showText: (text, bgColour) => {
-        $("#popupbox").show();
+    showText: (text, cssClass) => {
         $("#popuptext").html(text);
-        $("#popupbox").css({ "background-color": bgColour });
-        $("#popuptext").css({ "opacity": 0, "margin-left": "50px" });
+        $("#popupwrapper").removeClass();
+        $("#popupwrapper").addClass("animate__animated animate__jackInTheBox animate__fast");
 
-        const textWidth = $("#popuptext").width();
-        $("#popupbox").width(1);
-        $("#popupbox").animate({ width: textWidth + 30 }, 500);
-        $("#popuptext").animate({ "opacity": 1, "margin-left": "15px" }, 700);
+        setTimeout(popup.delete, 3000);
+    },
+    /**
+     * Displays popup on screen with the given text and colour.
+     */
+    holdText: (text, cssClass) => {
+        $("#popuptext").html(text);
+        $("#popupwrapper").removeClass();
+        $("#popupwrapper").addClass("animate__animated animate__jackInTheBox animate__fast");
     },
     /**
      * Removes popup from screen and resets state of all commands 
      */
     delete: () => {
         spotlightUser = ""; // TODO: Remove this
-        $("#popupbox").animate({ width: 0 }, 500);
-        $("#popuptext").animate({ "opacity": 0, "margin-left": "50px" }, 700);
+        $("#popupwrapper").removeClass();
+        $("#popupwrapper").addClass("animate__animated animate__backOutDown animate__fast");
     },
     /**
      * Formats text with emotes, This must be past only and all message un-formatted or emotes wont be replaced properly

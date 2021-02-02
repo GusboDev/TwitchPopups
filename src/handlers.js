@@ -1,20 +1,37 @@
 // =======================================
 // Command: !alert <text>
-// Description: will display whatever text comes after the !alert command
+// Description: will display whatever text comes after the !alert command, and hide after 3 seconds
 // =======================================
 actionHandlers['!alert'] = {
     security: (context, textContent) => {
         return context.mod || (context["badges-raw"] != null && context["badges-raw"].startsWith("broadcaster"))
     },
     handle: (context, textContent) => {
-        const formattedText = popup.formatEmotes(textContent, context.emotes, true).substr(7);
-        popup.showText(formattedText, alertBg);
-        if (playAlertSound){
+        const formattedText = popup.formatEmotes(textContent, context.emotes, false).substr(7);
+        popup.showText(formattedText, "alert");
+        if (playAlertSound) {
             new Audio(alertSoundFile).play();
-        } 
+        }
     }
 };
 
+
+// =======================================
+// Command: !banner <text>
+// Description: will display whatever text comes after the !banner command and stay until deleted or replaced
+// =======================================
+actionHandlers['!banner'] = {
+    security: (context, textContent) => {
+        return context.mod || (context["badges-raw"] != null && context["badges-raw"].startsWith("broadcaster"))
+    },
+    handle: (context, textContent) => {
+        const formattedText = popup.formatEmotes(textContent, context.emotes, false).substr(7);
+        popup.holdText(formattedText, "alert");
+        if (playAlertSound) {
+            new Audio(alertSoundFile).play();
+        }
+    }
+};
 
 // =======================================
 // Command: !delete
@@ -43,7 +60,7 @@ actionHandlers['!spotlight'] = {
     },
     handle: (context, textContent) => {
         spotlightUser = textContent.substr(12).toLowerCase();
-        popup.showText(`${spotlightEmoji} Welcome ${spotlightUser} to the stage!`, spotlightBg);
+        popup.showText(`${spotlightEmoji} Welcome ${spotlightUser} to the stage!`, "spotlight");
     }
 };
 
@@ -55,6 +72,50 @@ allHandlers.push({
     handle: (context, textContent) => {
         const formattedText = popup.formatEmotes(textContent, context.emotes, false);
         console.log(formattedText);
-        popup.showText(`${spotlightEmoji} ${context['display-name']}: ${formattedText}`, spotlightBg);
+        popup.showText(`${spotlightEmoji} ${context['display-name']}: ${formattedText}`, "spotlight");
     }
 });
+
+// =======================================
+// Bits donated
+// Description: Displays a pop-up thank you message when a user donates bits
+// =======================================
+
+actionHandlers["bits"] = {
+    handle: (context, userstate) => {
+        popup.showText(`${context.username} donated ${context.bits} bits like an awesome human`, "cheer");
+    }
+}
+
+// =======================================
+// User subscribed
+// Description: Displays a pop-up thank when a user subscribes
+// =======================================
+
+actionHandlers["sub"] = {
+    handle: (username, method, msg, tags) => {
+        popup.showText(`${username} has subscribed! Welcome!`, "cheer");
+    }
+}
+
+// =======================================
+// User resubscribed
+// Description: Displays a pop-up thank when a user resubscribes
+// =======================================
+
+actionHandlers["resub"] = {
+    handle: (username, streakMonths, msg, tags, methods) => {
+        popup.showText(`${username} resubbed with a streak of ${streakMonths} months!`, "cheer");
+    }
+}
+
+// =======================================
+// User followed
+// Description: Displays a pop-up thank when a user follows
+// =======================================
+
+actionHandlers["follow"] = {
+    handle: (username) => {
+        popup.showText(`Thanks for the follow, ${username}!`, "cheer");
+    }
+}

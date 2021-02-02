@@ -1,21 +1,19 @@
-#popuptext {
-    display: inline-block;
-    font-family: 'Open Sans Condensed';
-    font-weight: 700;
-    color: white;
-    font-size: 60px;
-    margin: 0;
-    margin-left: 15px;
-    white-space: nowrap;
+/* Font declaration */
+
+@font-face { font-family: soupofjustice; src: url('./fonts/soupofjustice.ttf') format('truetype')}
+
+/* Baseline styling */
+
+* {
+    box-sizing: border-box;
 }
 
-#popupbox {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    width: 0px;
-    height: 82px;
-    overflow: hidden;
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden
 }
 
 iframe {
@@ -25,14 +23,48 @@ iframe {
     padding: 0;
     margin: 0;
     border: none;
-    overflow: hidden;
 }
 
-body {
-    margin: 0;
-    padding: 0;
+#popupwrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    padding: 30px;
+}
+
+#popupbox {
     width: 100%;
-    height: 100%;
+    padding: 5px;
+    transform: rotate(-1deg);
+    overflow: visible !important;
+    text-align: center;
+    box-shadow: 12px 20px 8px rgba(0,0,0,0.3);
+}
+#popupbox::before {
+    width: 80%;
+    height: 105%;
+    content: '';
+    position: absolute;
+    top: 2.5%;
+    z-index: -1;
+    left: 10%;
+    transform: skew(-0.05turn, -1deg);
+    background: black;
+}
+
+#popuptext {
+    display: inline-block;
+    margin: auto;
+    font-family: soupofjustice, sans-serif;
+    font-weight: 400;
+    text-align: right;
+    color: white;
+    font-size: 60px;
+    padding: 5px 20px;
+    transform: rotate(1.7deg);
+    box-shadow: 12px 20px 8px rgba(0,0,0,0.6);
+    text-shadow: 2px 4px 0px black;
 }
 
 #popuptext img {
@@ -41,3 +73,27 @@ body {
     margin-right: -7px;
     margin-left: -8px;
 }
+
+
+/*  Apply colours per type of popup */
+.cheer {
+    background-color: black;
+}
+.cheer #popuptext {
+    background-color: #ee0000;
+}
+
+.alert {
+    background-color: black;
+}
+.alert #popuptext {
+    background-color: darkred;
+}
+
+.spotlight {
+    background-color: black;
+}
+.spotlight #popuptext {
+    background-color: orangered;
+}
+
