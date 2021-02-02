@@ -1,75 +1,27 @@
 # TwitchPopups
 
-Allows Twitch mods to display popup text on the stream via chat commands
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.2.
 
-## COMMAND LIST
+## Development server
 
-- !alert: will display whatever text comes after the !alert command
-- !spotlight [@username]: will display the chat of the specified user from that point on
-- !delete: will delete the popup
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## DOWNLOAD
+## Code scaffolding
 
-The latest version of TwitchPopups can be found [as a zip archive here](https://github.com/DaftLimmy/TwitchPopups/archive/master.zip)
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## INSTRUCTIONS
+## Build
 
-1. Extract the zip archive
-2. Edit settings.js and change "Limmy" to your Twitch channel name
-3. Use OBS/Streamlabs OBS to add twitchpopups.htm as a browser source (Fit to Screen, 1920x1080)
-4. Tick "Shutdown source when not visible" in browser source properties. That way, any tweaks you make are reloaded when you toggle the visibility button
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## UPGRADE
-1. Open your existing twitchpopups.htm and copy your configuration settings
-2. Download the latest version
-3. Open the zip archive and open the TwitchPopups-master directory
-4. Select all of the files and drag them into your existing TwitchPopups directory. Say yes to any prompts to overwrite files but be careful not to overwrite your custom animations!
-5. Edit the configuration section at the top of twitchpopups.htm, pasting in your settings from step 1.
-6. If OBS hasn't recognized the update press the "refresh cache of current page" button in browser source properties.
+## Running unit tests
 
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## ADVANCED: ADD CUSTOM HANDLERS
-If you want to add your own handlers, you will need to understand JavaScript and the tmi.js library.
-There are a few extra things to consider.
-1. Do you want it to fire based on a !command?
-2. Do you want it to fire on every chat?
-3. What security should prevent the handler being fired? e.g mod only, spotlight only etc.
-4. What should the handler do?
+## Running end-to-end tests
 
-Once you have answered those questions you are ready to add the handler.
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-1. Navigate to the handlers.js
-2. If you want a command copy the following code into the file:
-``` javascript
-actionHandlers['!command'] = {
-    security: (context, textContent) => {
-        return true; // This should return a boolean, true will fire the handler
-    },
-    handle: (context, textContent) => {
-        // Place handle script here
-    }
-};
-```
-3. If you want a general command copy the following code into the file:
-``` javascript
-allHandlers.push({
-    security: (context, textContent) => {
-        return true; // This should return a boolean, true will fire the handler
-    },
-    handle: (context, textContent) => {
-        // Place handle script here
-    }
-});
-```
-4. Complete your handler and don't forget to add a description to the readme.md
+## Further help
 
-## ADVANCED: POPUP HELPER
-The popup helper contains a few functions so you don't need to worry about the animations for the popup box! it can be accessed anywhere by typing `popup` followed by a function.
-
-Methods:
-
-`popup.showText(text, bgColour)`: Displays popup on screen with the given text and colour.
-
-`popup.delete()`: Removes popup from screen and resets state of all commands. 
-
-`popup.formatEmotes(message, emotes, upperCase)`: Formats text with emotes, This must be past only and all message un-formatted or emotes wont be replaced properly. e.g `popup.formatEmotes('Hello Twitch', context.emotes, true).substr(7)` The substr function removes the !command, just change the number to the length of the command.
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
